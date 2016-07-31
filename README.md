@@ -31,6 +31,9 @@ namespace Test {
             // 5. Execute the ModuleInitializerFunction
             // 6. Cache the module and its exports using the module's absolute path
             System.Dynamic.ExpandoObject exports = host.Require("./main.js");
+
+            // "What did I get? 3"
+            Console.WriteLine("What did I get? {0}", exports.three);
         }
     }
 }
