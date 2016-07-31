@@ -2,12 +2,10 @@
 A game engine built on top of MonoGame that uses the V8 JavaScript engine to provide support for dynamic scripting.
 
 ## What is V8?
----
 
 V8 is the JavaScript engine that Google created for Chrome. It is lean, fast and powerful. It is also the bsae of the node.js runtime.
 
 ## How do I use Daedalus?
----
 
 At its core, Daedalus uses ClearScript.V8 and as such anything you can do with ClearScript you should be able to do with Deadalus.
 
@@ -55,8 +53,6 @@ Console.WriteLine("Hello from {0}", __filename);
 
 ## Requiring Modules
 
----
-
 Daedalus uses a module system that is similiar to node. Importing and exporting in Daedalus has the same syntax as node.
 
 ```JavaScript
@@ -70,7 +66,6 @@ var rootModule = require("/root-module.js);
 
 // A module that was installed using npm in the ModuleHost's root directory.
 var npmModule = require("npm-module");
-
 ```
 
 - *Note: file extensions are required for relative and root modules (future plans may remove the extension)*
@@ -78,13 +73,9 @@ var npmModule = require("npm-module");
 
 ## npm
 
----
-
 Daedalus was built with npm in mind and supports managing modules using npm.
 
 - *Note: Daedalus is not the node runtime environment and as such does not include node's extensive module library.*
-
----
 
 ## TypeScript Definition File
 
