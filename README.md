@@ -3,7 +3,7 @@ A game engine built on top of MonoGame that uses the V8 JavaScript engine to pro
 
 ## What is V8?
 
-V8 is the JavaScript engine that Google created for Chrome. It is lean, fast and powerful. It is also the bsae of the node.js runtime.
+V8 is the JavaScript engine that Google created for Chrome. It is lean, fast and powerful. It is also the base of the node.js runtime.
 
 ## How do I use Daedalus?
 
