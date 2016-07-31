@@ -59,10 +59,9 @@ Console.WriteLine("Hello from {0}", __filename);
 Daedalus uses a module system that is similiar to node. Importing and exporting in Daedalus has the same syntax as node.
 
 ```JavaScript
-// A relative module
+// Relative Modules
 var myModule = require("./my-module.js");
 var backwardsModulle = require("../backwards-module.js");
-
 
 // A module that is in the root of the ModuleHost's directory
 var rootModule = require("/root-module.js");
