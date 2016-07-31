@@ -1,14 +1,14 @@
-﻿using System.IO;
+﻿using Microsoft.ClearScript;
 using Microsoft.ClearScript.V8;
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Dynamic;
-using Newtonsoft.Json;
-using Microsoft.ClearScript;
+using System.IO;
 
 namespace Daedalus.Scripting {
   public class ModuleHost {
-    private static readonly string _scriptHeader = @"host.del(ScriptReturnFunction, function (exports, require, module, __filename, __dirname) { " + Environment.NewLine;
+    private static readonly string _scriptHeader = @"host.del(ModuleInitializerFunction, function (exports, require, module, __filename, __dirname) { " + Environment.NewLine;
     private static readonly string _scriptFooter = Environment.NewLine + @"});";
 
     public ModuleHost(string root) {
@@ -16,9 +16,39 @@ namespace Daedalus.Scripting {
       ModuleCache = new Dictionary<string, Module>();
 
       Engine = new V8ScriptEngine();
+
+      // this is required in order for interop
       Engine.AddHostObject("host", new HostFunctions());
-      Engine.AddHostType("Console", typeof(Console));
-      Engine.AddHostType("ScriptReturnFunction", typeof(ModuleInitializerFunction));
+
+      // Expose the console for logging
+      Engine.AddHostType("Log", typeof(Console));
+
+      // Expose the ModuleInitializerFunction for creating modules
+      Engine.AddHostType("ModuleInitializerFunction", typeof(ModuleInitializerFunction));
+    }
+    public ModuleHost(string root, ObservableCollection<EngineRegistrationFunction> nativeModuleRegistrations) : this(root) {
+      // Register the native modules
+      foreach(var fn in nativeModuleRegistrations) {
+        fn(Engine);
+      }
+
+      nativeModuleRegistrations.CollectionChanged += Registrations_CollectionChanged;
+    }
+
+    private void Registrations_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e) {
+      switch(e.Action) {
+        case System.Collections.Specialized.NotifyCollectionChangedAction.Add:
+          // new items, so we should register them with the engine
+          foreach(var item in e.NewItems) {
+            var fn = item as EngineRegistrationFunction;
+            fn?.Invoke(Engine);
+          }
+ 
+          break;
+        case System.Collections.Specialized.NotifyCollectionChangedAction.Remove:
+          // todo: maybe we can remove modules in the future
+          break;
+      }
     }
 
     public readonly V8ScriptEngine Engine;

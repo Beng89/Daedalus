@@ -1,18 +1,35 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Daedalus.Core;
+using Daedalus.NativeModules;
+using Daedalus.NativeModules.Modules;
+using Daedalus.Scripting;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Daedalus {
   /// <summary>
   /// This is the main type for your game.
   /// </summary>
   public class Game1 : Game {
-    GraphicsDeviceManager graphics;
-    SpriteBatch spriteBatch;
+    private GraphicsDeviceManager _graphics;
+    private SpriteBatch _spriteBatch;
+    private ModuleHost _host;
+    private ObservableCollection<EngineRegistrationFunction> _registrations = new ObservableCollection<EngineRegistrationFunction>();
+
+    // this is temporary (for dinking around).
+    private List<Texture2D> sprites = new List<Texture2D>();
 
     public Game1() {
-      graphics = new GraphicsDeviceManager(this);
+      // Content isn't really being used, so we can probably remove this line at some point
       Content.RootDirectory = "Content";
+
+      _graphics = new GraphicsDeviceManager(this);
+      _host = new ModuleHost("Content/Adventures/Entry", _registrations);
+
+      IsMouseVisible = true;
     }
 
     /// <summary>
@@ -22,8 +39,22 @@ namespace Daedalus {
     /// and initialize them as well.
     /// </summary>
     protected override void Initialize() {
-      // TODO: Add your initialization logic here
+      // Create modules
+      var _randomModule = new DaedalusRandomFunctions();
+      var _contentModule = new DynamicContent(GraphicsDevice);
+      var _monoGameCoreModule = new MonoGameCore();
 
+      // initialize modules
+      _randomModule.Initialize(_registrations);
+      _contentModule.Initialize(_registrations);
+      _monoGameCoreModule.Initialize(_registrations);
+
+      // this is temporary for dinking around
+      _host.Engine.AddHostObject("sprites", sprites);
+
+      // Important! 
+      // finish all initialization before calling base.initialize();
+      // base.Initialize will call LoadContent, which could mean null references
       base.Initialize();
     }
 
@@ -33,9 +64,11 @@ namespace Daedalus {
     /// </summary>
     protected override void LoadContent() {
       // Create a new SpriteBatch, which can be used to draw textures.
-      spriteBatch = new SpriteBatch(GraphicsDevice);
+      // this will probably be removed at some point
+      _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-      // TODO: use this.Content to load your game content here
+      // Load up the main entry point for this host
+      _host.Require("main.js");
     }
 
     /// <summary>
@@ -43,7 +76,8 @@ namespace Daedalus {
     /// game-specific content.
     /// </summary>
     protected override void UnloadContent() {
-      // TODO: Unload any non ContentManager content here
+      // Dispose of the host, otherwise we may leak memory from the javascript engine
+      _host.Dispose();
     }
 
     /// <summary>
@@ -65,9 +99,17 @@ namespace Daedalus {
     /// </summary>
     /// <param name="gameTime">Provides a snapshot of timing values.</param>
     protected override void Draw(GameTime gameTime) {
-      GraphicsDevice.Clear(Color.CornflowerBlue);
+      GraphicsDevice.Clear(Color.TransparentBlack);
 
       // TODO: Add your drawing code here
+      _spriteBatch.Begin();
+
+      // woo draw
+      sprites.ForEach(sprite => {
+        _spriteBatch.Draw(sprite, Vector2.Zero, Color.White);
+      });
+
+      _spriteBatch.End();
 
       base.Draw(gameTime);
     }

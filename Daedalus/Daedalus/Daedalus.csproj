@@ -38,13 +38,19 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Core\DynamicContentManager.cs" />
+    <Compile Include="NativeModules\AdventureCore.cs" />
+    <Compile Include="NativeModules\Modules\DaedalusRandomFunctions.cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="NativeModules\Modules\DynamicContent.cs" />
+    <Compile Include="NativeModules\Modules\MonoGameCore.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scripting\Delegates.cs" />
     <Compile Include="Scripting\JsonPackage.cs" />
     <Compile Include="Scripting\Module.cs" />
     <Compile Include="Scripting\ModuleHost.cs" />
+    <Compile Include="NativeModules\NativeModule.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="ClearScript, Version=5.4.6.0, Culture=neutral, PublicKeyToken=935d0c957da47c73, processorArchitecture=MSIL">
@@ -59,15 +65,20 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icon.ico" />
+    <Content Include="Content\Adventures\Entry\Images\healer_f.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Adventures\Entry\main.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <MonoGameContentReference Include="Content\Content.mgcb" />
-  </ItemGroup>
-  <ItemGroup>
+    <None Include="Content\Adventures\Entry\jsconfig.json" />
     <None Include="Licenses\ClearScript.main.license" />
     <None Include="Licenses\v8.main.license" />
     <None Include="Licenses\v8.strongtalk.license" />
@@ -76,7 +87,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Core\" />
+    <Folder Include="Content\Adventures\Entry\Src\" />
+    <Folder Include="Core\Adventures\" />
+    <Folder Include="Core\NewFolder1\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Content\Adventures\Entry\.types\daedalus.d.ts" />
+    <None Include="Content\Adventures\Entry\.types\dynamic-content.d.ts" />
+    <None Include="Content\Adventures\Entry\.types\mono-game-core.d.ts" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
