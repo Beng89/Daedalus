@@ -30,6 +30,7 @@ namespace Test {
             // 4. Wrap the source code in a ModuleInitializerFunction 
             // 5. Execute the ModuleInitializerFunction
             // 6. Cache the module and its exports using the module's absolute path
+            // 7. Return the exports object
             System.Dynamic.ExpandoObject exports = host.Require("./main.js");
 
             // "What did I get? 3"
