@@ -58,11 +58,11 @@ Daedalus uses a module system that is similiar to node. Importing and exporting 
 ```JavaScript
 // A relative module
 var myModule = require("./my-module.js");
-var backwardsModulle = require("../backwards-module.js);
+var backwardsModulle = require("../backwards-module.js");
 
 
 // A module that is in the root of the ModuleHost's directory
-var rootModule = require("/root-module.js);
+var rootModule = require("/root-module.js");
 
 // A module that was installed using npm in the ModuleHost's root directory.
 var npmModule = require("npm-module");
