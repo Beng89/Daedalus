@@ -34,3 +34,33 @@ warrior.Position = new Vector2(0, 250);
 GameObject.Components.Add(warrior);
 warrior.Animations.StartAnimation("Move-Right");
 warrior.Velocity = Vector2.UnitX;
+
+function checkCreaturePosition(creature, width) {
+  let flipA = (creature.Velocity.X > 0 && creature.Position.X + creature.Origin.X > width)
+  let flipB = (creature.Velocity.X < 0 && creature.Position.X - creature.Origin.X < 0);
+  if(flipA || flipB) {
+    creature.Velocity = Vector2.Multiply(creature.Velocity, Vector2.Multiply(Vector2.UnitX, -1));
+
+    if(flipA) {
+      creature.Animations.StartAnimation("Move-Left");
+    }
+    else {
+      creature.Animations.StartAnimation("Move-Right");
+    }
+  }
+}
+
+var x = 3;
+var test = new SimpleGameComponent(GameObject);
+test.UpdateFunction = new SimpleUpdateFunction((time) => {
+  var width = GameObject.GraphicsDevice.Viewport.Width;
+
+  checkCreaturePosition(healer, width);
+  checkCreaturePosition(mage, width);
+  checkCreaturePosition(ninja, width);
+  checkCreaturePosition(ranger, width);
+  checkCreaturePosition(townfolk, width);
+  checkCreaturePosition(warrior, width);
+});
+
+GameObject.Components.Add(test);

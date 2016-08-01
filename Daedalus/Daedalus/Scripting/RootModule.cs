@@ -9,7 +9,7 @@ using System.IO;
 
 namespace Daedalus.Scripting {
   public class RootModule {
-    private static readonly string _scriptHeader = @"host.del(ModuleInitializerFunction, function (exports, require, module, __filename, __dirname) { " + Environment.NewLine;
+    private static readonly string _scriptHeader = @"Host.del(ModuleInitializerFunction, function (exports, require, module, __filename, __dirname) { " + Environment.NewLine;
     private static readonly string _scriptFooter = Environment.NewLine + @"});";
 
     public RootModule(string root) {
@@ -19,7 +19,7 @@ namespace Daedalus.Scripting {
       Engine = new V8ScriptEngine();
 
       // this is required in order for interop
-      Engine.AddHostObject("host", new HostFunctions());
+      Engine.AddHostObject("Host", new HostFunctions());
 
       // Expose the console for logging
       Engine.AddHostType("Log", typeof(Console));

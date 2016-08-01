@@ -1,4 +1,5 @@
-﻿using Daedalus.Core.Animations;
+﻿using Daedalus.Core;
+using Daedalus.Core.Animations;
 using Daedalus.Core.Content;
 using Daedalus.Core.Creatures;
 using Microsoft.ClearScript.V8;
@@ -18,6 +19,10 @@ namespace Daedalus.NativeModules.Modules {
     public override void Register(V8ScriptEngine engine) {
       // Expose the game
       engine.AddHostObject("GameObject", Game);
+
+      // Daedalus.Core
+      engine.AddHostType("SimpleGameComponent", typeof(SimpleGameComponent));
+      engine.AddHostType("SimpleUpdateFunction", typeof(SimpleUpdateFunction));
 
       // Daedalus.Core.Content
       engine.AddHostObject("Content", ContentManager);

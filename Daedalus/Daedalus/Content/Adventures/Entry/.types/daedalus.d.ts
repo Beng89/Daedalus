@@ -22,6 +22,18 @@ declare interface INameableObject {
   Name;
   Description;
 }
+declare interface SimpleUpdateFunctionStatic {
+  new (fn: (time: GameTime) => void): SimpleUpdateFunctionInstance;
+}
+declare interface SimpleUpdateFunctionInstance {
+  (gameTime: GameTime): void;
+}
+declare const SimpleUpdateFunction: SimpleUpdateFunctionStatic;
+
+declare class SimpleGameComponent extends GameComponent {
+  constructor(game: Game);
+  public UpdateFunction: SimpleUpdateFunctionInstance;
+}
 
 // Daedalus.Core.Animations
 declare class AnimationFrame {

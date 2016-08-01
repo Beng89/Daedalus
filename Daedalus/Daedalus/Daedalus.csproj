@@ -48,6 +48,7 @@
     <Compile Include="Core\Creatures\CreatureGender.cs" />
     <Compile Include="Core\Creatures\CreatureRace.cs" />
     <Compile Include="Core\INameableObject.cs" />
+    <Compile Include="Core\SimpleGameComponent.cs" />
     <Compile Include="Core\Sprites\Sprite.cs" />
     <Compile Include="Core\Sprites\SpriteRenderer.cs" />
     <Compile Include="JsonConverters\ColorConverter.cs" />

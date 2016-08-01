@@ -345,7 +345,7 @@ declare class DrawableGameComponent extends GameComponent {
   LoadContent(): void;
 
   DrawOrder: number;
-  GraphicsDevcice: GraphicsDevice;
+  GraphicsDevice: GraphicsDevice;
   Visible: boolean;
 
   DrawOrderChagned: ClearScriptEvent<System.EventArgs>;
@@ -358,7 +358,7 @@ declare class Game extends DrawableGameComponent {
   Tick(): void;
 
   Components: GameComponentCollection;
-  GraphicsDevcice: GraphicsDevice;
+  GraphicsDevice: GraphicsDevice;
   IsActive: boolean;
   IsFixedTimeStep: boolean;
   IsMouseVisible: boolean;
