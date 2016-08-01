@@ -1,4 +1,5 @@
-﻿using Microsoft.ClearScript;
+﻿using Daedalus.NativeModules;
+using Microsoft.ClearScript;
 using Microsoft.ClearScript.V8;
 using System;
 using System.Collections.Generic;
@@ -7,11 +8,11 @@ using System.Dynamic;
 using System.IO;
 
 namespace Daedalus.Scripting {
-  public class ModuleHost {
+  public class RootModule {
     private static readonly string _scriptHeader = @"host.del(ModuleInitializerFunction, function (exports, require, module, __filename, __dirname) { " + Environment.NewLine;
     private static readonly string _scriptFooter = Environment.NewLine + @"});";
 
-    public ModuleHost(string root) {
+    public RootModule(string root) {
       Root = Environment.CurrentDirectory + Path.DirectorySeparatorChar + root + Path.DirectorySeparatorChar;
       ModuleCache = new Dictionary<string, Module>();
 
@@ -26,10 +27,10 @@ namespace Daedalus.Scripting {
       // Expose the ModuleInitializerFunction for creating modules
       Engine.AddHostType("ModuleInitializerFunction", typeof(ModuleInitializerFunction));
     }
-    public ModuleHost(string root, ObservableCollection<EngineRegistrationFunction> nativeModuleRegistrations) : this(root) {
+    public RootModule(string root, ObservableCollection<NativeModule> nativeModuleRegistrations) : this(root) {
       // Register the native modules
-      foreach(var fn in nativeModuleRegistrations) {
-        fn(Engine);
+      foreach(var module in nativeModuleRegistrations) {
+        module.Register(Engine);
       }
 
       nativeModuleRegistrations.CollectionChanged += Registrations_CollectionChanged;
@@ -40,8 +41,8 @@ namespace Daedalus.Scripting {
         case System.Collections.Specialized.NotifyCollectionChangedAction.Add:
           // new items, so we should register them with the engine
           foreach(var item in e.NewItems) {
-            var fn = item as EngineRegistrationFunction;
-            fn?.Invoke(Engine);
+            var fn = item as NativeModule;
+            fn?.Register(Engine);
           }
  
           break;

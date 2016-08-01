@@ -1,16 +1,9 @@
-﻿using Daedalus.Scripting;
-using System.Collections.ObjectModel;
+﻿using Microsoft.ClearScript.V8;
 
 namespace Daedalus.NativeModules {
   public abstract class NativeModule {
     public NativeModule() { }
 
-    public virtual void Initialize(ObservableCollection<EngineRegistrationFunction> registrations) {
-      if(!registrations.Contains(RegistrationFunction)) {
-        registrations.Add(RegistrationFunction);
-      }
-    }
- 
-    public EngineRegistrationFunction RegistrationFunction { get; protected set; }
+    public abstract void Register(V8ScriptEngine engine);
   }
 }

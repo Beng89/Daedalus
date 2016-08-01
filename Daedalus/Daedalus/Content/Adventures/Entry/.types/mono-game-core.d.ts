@@ -2,7 +2,7 @@
 
 declare class BoundingBox {
   // Static Member(s)
-  public static CreateFromPoints(points: Array<Vector3>): BoundingBox;
+  public static CreateFromPoints(points: System.Array<Vector3>): BoundingBox;
   public static CreateFromSphere(sphere: BoundingSphere): BoundingBox;
   public static CreateMerged(a: BoundingBox, b: BoundingBox): BoundingBox;
 
@@ -15,7 +15,7 @@ declare class BoundingBox {
   public Contains(b: BoundingSphere): ContainmentType;
   public Contains(b: Vector3): ContainmentType;
   public Equals(b: BoundingBox);
-  public GetCorners(): Array<Vector3>;
+  public GetCorners(): System.Array<Vector3>;
   public Intersects(b: BoundingBox): boolean;
   public Intersects(b: BoundingFrustum): boolean;
   public Intersects(b: BoundingSphere): boolean;
@@ -39,7 +39,7 @@ declare class BoundingFrustum {
   public Contains(b: BoundingSphere): ContainmentType;
   public Contains(b: Vector3): ContainmentType;
   public Equals(b: BoundingFrustum);
-  public GetCorners(): Array<Vector3>;
+  public GetCorners(): System.Array<Vector3>;
   public Intersects(b: BoundingBox): boolean;
   public Intersects(b: BoundingFrustum): boolean;
   public Intersects(b: BoundingSphere): boolean;
@@ -59,7 +59,7 @@ declare class BoundingFrustum {
 }
 declare class BoundingSphere {
   // Static Member(s)
-  public static CreateFromPoints(points: Array<Vector3>): BoundingSphere;
+  public static CreateFromPoints(points: System.Array<Vector3>): BoundingSphere;
   public static CreateFromBoundingBox(box: BoundingBox): BoundingSphere;
   public static CreateFromFrustum(frustum: BoundingFrustum): BoundingSphere;
 
@@ -309,7 +309,7 @@ declare class CurveKeyCollection {
   public Clear(): void;
   public Clone(): CurveKeyCollection;
   public Contains(key: CurveKey): boolean;
-  public CopyTo(destination: Array<CurveKey>, i: number): void;
+  public CopyTo(destination: System.Array<CurveKey>, i: number): void;
   public GetEnumerator(): any; // TODO: Fix this type
   public IndexOf(item: CurveKey): number;
   public Remove(item: CurveKey): boolean;
@@ -340,7 +340,7 @@ declare enum DisplayOrientation {
   PortraitDown,
   Unknown
 }
-declare interface DrawableGameComponent extends GameComponent {
+declare class DrawableGameComponent extends GameComponent {
   Draw(gameTime: GameTime): void;
   LoadContent(): void;
 
@@ -351,7 +351,7 @@ declare interface DrawableGameComponent extends GameComponent {
   DrawOrderChagned: ClearScriptEvent<System.EventArgs>;
   VisibleChanged: ClearScriptEvent<System.EventArgs>;
 }
-declare interface Game extends DrawableGameComponent {
+declare class Game extends DrawableGameComponent {
   Exit(): void;
   RunOneFrame(): void;
   SuppressDraw(): void;
@@ -372,7 +372,7 @@ declare interface Game extends DrawableGameComponent {
   Disposed: ClearScriptEvent<System.EventArgs>;
   Exiting: ClearScriptEvent<System.EventArgs>;
 }
-declare interface GameComponent {
+declare class GameComponent {
   Initialize(): void;
   Update(gameTime: GameTime): void;
 
@@ -394,8 +394,61 @@ declare class GameComponentCollection {
 
   public ComponentAdded: ClearScriptEvent<GameComponentsCollectionEventArgs>;
   public ComponentRemoved: ClearScriptEvent<GameComponentsCollectionEventArgs>;
+
+  public Count: number;
+  public Items: System.List<GameComponent>;
+  public Add(item: GameComponent): void;
+  public Clear(): void;
+  public Contains(item: GameComponent): boolean;
+  public Add(item: GameComponent): void;
+  public AddRange(collection: System.IEnumerable<GameComponent>): void;
+  public AsReadOnly(): any; // is a ReadOnlyCollection
+  public BinarySearch(item: GameComponent): number;
+  public BinarySearch(item: GameComponent, comparer: System.IComparer<GameComponent>): number;
+  public BinarySearch(i: number, count: number, item: GameComponent, comparer: System.IComparer<GameComponent>): number;
+  public Clear(): void;
+  public Contains(item: GameComponent): boolean;
+  public CopyTo(array: Array<GameComponent>): void;
+  public CopyTo(array: Array<GameComponent>, arrayIndex: number): void;
+  public CopyTo(i: number, array: Array<GameComponent>, arrayIndex: number, count: number): void;
+  public Exists(predicate: System.Predicate<GameComponent>): boolean;
+  public Find(predicate: System.Predicate<GameComponent>): GameComponent;
+  public FindAll(predicate: System.Predicate<GameComponent>): System.List<GameComponent>;
+  public FindIndex(predicate: System.Predicate<GameComponent>): number;
+  public FindIndex(i: number, predicate: System.Predicate<GameComponent>): number;
+  public FindIndex(i: number, count: number, predicate: System.Predicate<GameComponent>): number;
+  public FindLast(predicate: System.Predicate<GameComponent>): GameComponent;
+  public FindLastIndex(predicate: System.Predicate<GameComponent>): GameComponent;
+  public FindLastIndex(i: number, predicate: System.Predicate<GameComponent>): GameComponent;
+  public FindLastIndex(i: number, count: number, predicate: System.Predicate<GameComponent>): GameComponent;
+  public ForEach(action: System.Action<GameComponent>): void;
+  public GetRange(i: number, count: number): System.List<GameComponent>;
+  public IndexOf(item: GameComponent): number;
+  public IndexOf(item: GameComponent, i: number): number;
+  public IndexOf(item: GameComponent, i: number, count: number): number;
+  public Insert(i: number, item: GameComponent): void;
+  public InsertRange(i: number, items: System.IEnumerable<GameComponent>): void;
+  public LastIndexOf(item: GameComponent): number;
+  public LastIndexOf(item: GameComponent, i: number): number;
+  public LastIndexOf(item: GameComponent, i: number, count: number): number;
+  public Remove(item: GameComponent): boolean;
+  public RemoveAll(predicate: System.Predicate<GameComponent>): number;
+  public RemoveAt(i: number): void;
+  public RemoveRange(i: number, count: number): void;
+  public Reverse(): void;
+  public Reverse(i: number, count: number): void;
+  public Sort(): void;
+  public Sort(comparison: System.Comparison<GameComponent>): void;
+  public Sort(comparer: System.IComparer<GameComponent>): void;
+  public Sort(i: number, count: number, comparer: System.IComparer<GameComponent>): void;
+  public ToArray(): Array<GameComponent>;
+  public TrimExcess(): void;
+  public TrueForAll(predicate: System.Predicate<GameComponent>): boolean;
+
+
+  [ i: number ] : GameComponent;
 }
-declare interface GameComponentsCollectionEventArgs extends System.EventArgs {
+declare class GameComponentsCollectionEventArgs extends System.EventArgs {
   constructor(component: GameComponent);
   GameComponent: GameComponent;
 }
@@ -492,7 +545,7 @@ declare class Matrix {
   public static Multiply(a: Matrix, b: Matrix): Matrix;
   public static Negate(a: Matrix): Matrix;
   public static Subtract(a: Matrix, b: Matrix): Matrix;
-  public static ToFloatArray(a: Matrix): Array<number>;
+  public static ToFloatArray(a: Matrix): System.Array<number>;
   public ToString(): string;
   public static Transpose(a: Matrix): Matrix;
   public Backward: Vector3;
@@ -522,7 +575,7 @@ declare class Matrix {
   public M43: number;
   public M44: number;
 
-  [ i: number ] : Array<number> | number | any;
+  [ i: number ] : System.Array<number> | number | any;
 }
 declare class Plane {
   public Dot(value: Vector4): number;
@@ -679,9 +732,9 @@ declare class Vector2 {
   public static Subtract(a: Vector2, b: number): Vector2;
   public static Transform(position: Vector2, matrix: Matrix): Vector2;
   public static Transform(position: Vector2, rotation: Quaternion): Vector2;
-  public static Transform(source: Array<Vector2>, srcIdx: number, refMatrix: Matrix, dst: Array<Vector2>, dstIdx: number, length: number): void;
+  public static Transform(source: System.Array<Vector2>, srcIdx: number, refMatrix: Matrix, dst: System.Array<Vector2>, dstIdx: number, length: number): void;
   public static TransformNormal(a: Vector2, matrix: Matrix): Vector2;
-  public static TransformNormal(source: Array<Vector2>, srcIdx: number, refMatrix: Matrix, dst: Array<Vector2>, dstIdx: number, length: number): void;
+  public static TransformNormal(source: System.Array<Vector2>, srcIdx: number, refMatrix: Matrix, dst: System.Array<Vector2>, dstIdx: number, length: number): void;
 
   public static One: Vector2;
   public static UnitX: Vector2;
@@ -729,9 +782,9 @@ declare class Vector3 {
   public static Subtract(a: Vector3, b: number): Vector3;
   public static Transform(position: Vector3, matrix: Matrix): Vector3;
   public static Transform(position: Vector3, rotation: Quaternion): Vector3;
-  public static Transform(source: Array<Vector3>, srcIdx: number, refMatrix: Matrix, dst: Array<Vector3>, dstIdx: number, length: number): void;
+  public static Transform(source: System.Array<Vector3>, srcIdx: number, refMatrix: Matrix, dst: System.Array<Vector3>, dstIdx: number, length: number): void;
   public static TransformNormal(a: Vector3, matrix: Matrix): Vector3;
-  public static TransformNormal(source: Array<Vector3>, srcIdx: number, refMatrix: Matrix, dst: Array<Vector3>, dstIdx: number, length: number): void;
+  public static TransformNormal(source: System.Array<Vector3>, srcIdx: number, refMatrix: Matrix, dst: System.Array<Vector3>, dstIdx: number, length: number): void;
 
   public static Backward: Vector3;
   public static Down: Vector3;
@@ -788,9 +841,9 @@ declare class Vector4 {
   public static Subtract(a: Vector4, b: number): Vector4;
   public static Transform(position: Vector4, matrix: Matrix): Vector4;
   public static Transform(position: Vector4, rotation: Quaternion): Vector4;
-  public static Transform(source: Array<Vector4>, srcIdx: number, refMatrix: Matrix, dst: Array<Vector4>, dstIdx: number, length: number): void;
+  public static Transform(source: System.Array<Vector4>, srcIdx: number, refMatrix: Matrix, dst: System.Array<Vector4>, dstIdx: number, length: number): void;
   public static TransformNormal(a: Vector4, matrix: Matrix): Vector4;
-  public static TransformNormal(source: Array<Vector4>, srcIdx: number, refMatrix: Matrix, dst: Array<Vector4>, dstIdx: number, length: number): void;
+  public static TransformNormal(source: System.Array<Vector4>, srcIdx: number, refMatrix: Matrix, dst: System.Array<Vector4>, dstIdx: number, length: number): void;
 
   public static One: Vector4;
   public static UnitW: Vector4;
@@ -839,6 +892,11 @@ declare interface Viewport {
   X: number;
   Y: number;
 }
+declare enum SpriteEffects {
+  None,
+  FlipHorizontally,
+  FlipVertically
+}
 
 // Microsoft.Xna.Framework.Audio
 
@@ -868,7 +926,7 @@ declare namespace SoundEffect {
 }
 declare interface SoundEffectInstance {
   Apply3D(listener: AudioListener, emitter: AudioEmitter): void;
-  Apply3D(listeners: Array<AudioListener>, emitter: AudioEmitter): void;
+  Apply3D(listeners: System.Array<AudioListener>, emitter: AudioEmitter): void;
   Pause(): void;
   Play(): void;
   Resume(): void;

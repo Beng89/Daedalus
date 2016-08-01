@@ -1,21 +1,36 @@
-Log.WriteLine("Generating some random numbers");
+var healer = require("./Creatures/Female/Healer.js").creature;
+healer.Position = new Vector2(0, 50);
+GameObject.Components.Add(healer);
+healer.Animations.StartAnimation("Move-Right");
+healer.Velocity = Vector2.UnitX;
+healer.ModifierMovementSpeed = 3;
 
-// this is not natively supported, sooo...
-// setTimeout(() => {
-//   Log.WriteLine("woo the timeout was awesome.");
-// }, 3000);
+var mage = require("./Creatures/Female/Mage.js").creature;
+mage.Position = new Vector2(0, 90);
+GameObject.Components.Add(mage);
+mage.Animations.StartAnimation("Move-Right");
+mage.Velocity = Vector2.UnitX;
 
-for(let i = 0; i < 100; i++) {
-  Log.WriteLine("-> {0} = {1}", i, d100());
-}
+var ninja = require("./Creatures/Female/Ninja.js").creature;
+ninja.Position = new Vector2(0, 130);
+GameObject.Components.Add(ninja);
+ninja.Animations.StartAnimation("Move-Right");
+ninja.Velocity = Vector2.UnitX;
 
-Log.WriteLine("Done generating some random numbers");
+var ranger = require("./Creatures/Female/Ranger.js").creature;
+ranger.Position = new Vector2(0, 170);
+GameObject.Components.Add(ranger);
+ranger.Animations.StartAnimation("Move-Right");
+ranger.Velocity = Vector2.UnitX;
 
-test();
+var townfolk = require("./Creatures/Female/Townfolk.js").creature;
+townfolk.Position = new Vector2(0, 210);
+GameObject.Components.Add(townfolk);
+townfolk.Animations.StartAnimation("Move-Right");
+townfolk.Velocity = Vector2.UnitX;
 
-exports.healerTexture = Content.LoadTexture2D(__dirname + "/images/healer_f.png");
-exports.healerTexture2 = Content.LoadTexture2D(__dirname + "/images/healer_f.png");
-
-var texture = Content.LoadTexture2D(__dirname + "/images/healer_f.png");
-Log.WriteLine("Sound State?: {0}", SoundState.Playing);
-sprites.Add(texture);
+var warrior = require("./Creatures/Female/Warrior.js").creature;
+warrior.Position = new Vector2(0, 250);
+GameObject.Components.Add(warrior);
+warrior.Animations.StartAnimation("Move-Right");
+warrior.Velocity = Vector2.UnitX;

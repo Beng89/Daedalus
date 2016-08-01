@@ -6,7 +6,7 @@ using System.IO;
 
 namespace Daedalus.Scripting {
   public class Module {
-    private readonly ModuleHost _host;
+    private readonly RootModule _host;
     private readonly V8ScriptEngine _engine;
 
     private readonly string __fileName;
@@ -95,7 +95,7 @@ namespace Daedalus.Scripting {
       return module.exports;
     }
 
-    public Module(ModuleHost host, string path) {
+    public Module(RootModule host, string path) {
       exports = new ExpandoObject();
 
       _host = host;

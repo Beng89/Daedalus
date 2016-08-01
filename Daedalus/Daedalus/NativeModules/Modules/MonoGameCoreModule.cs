@@ -1,12 +1,14 @@
-﻿using Daedalus.Scripting;
+﻿using Microsoft.ClearScript.V8;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 
 namespace Daedalus.NativeModules.Modules {
-  public class MonoGameCore : NativeModule {
-    private static EngineRegistrationFunction _register = engine => {
+  public class MonoGameCoreModule : NativeModule {
+    public MonoGameCoreModule() : base() { }
+
+    public override void Register(V8ScriptEngine engine) {
       // System
       engine.AddHostType("System.TimeSpan", typeof(TimeSpan));
       engine.AddHostType("System.EventArgs", typeof(EventArgs));
@@ -40,16 +42,14 @@ namespace Daedalus.NativeModules.Modules {
       engine.AddHostType("Vector2", typeof(Vector2));
       engine.AddHostType("Vector3", typeof(Vector3));
       engine.AddHostType("Vector4", typeof(Vector4));
-      
+
       // Microsoft.Xna.Framework.Graphics
       //engine.AddHostType("Texture2D", typeof(Texture2D)); // should not be created in JS land
+      engine.AddHostType("SpriteEffects", typeof(SpriteEffects));
 
       // Microsoft.Xna.Framework.Audio
       //engine.AddHostType("SoundEffect", typeof(SoundEffect)); // should not be created in JS land
       engine.AddHostType("SoundState", typeof(SoundState));
-    };
-    public MonoGameCore() : base() {
-      RegistrationFunction = _register;
     }
   }
 }

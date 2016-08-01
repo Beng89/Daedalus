@@ -1,12 +1,9 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using System.IO;
-using System;
 using System.Collections.Generic;
-using Microsoft.Xna.Framework;
-using System.Drawing;
 using Microsoft.Xna.Framework.Audio;
 
-namespace Daedalus.Core {
+namespace Daedalus.Core.Content {
   public class DynamicContentManager {
     private GraphicsDevice _graphicsDevice;
 
