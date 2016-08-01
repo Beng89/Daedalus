@@ -113,43 +113,43 @@
     <Content Include="Content\Adventures\Entry\Creatures\Male\Ranger\ranger_m.png" />
     <Content Include="Content\Adventures\Entry\Creatures\Male\Townfolk\townfolk1_m.png" />
     <Content Include="Content\Adventures\Entry\Creatures\Male\Warrior\warrior_m.png" />
-    <Content Include="Content\Adventures\Entry\Textures\Female\Healer.png">
+    <Content Include="Content\Adventures\Entry\Textures\Creatures\Female\Healer.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Adventures\Entry\Textures\Female\Mage.png">
+    <Content Include="Content\Adventures\Entry\Textures\Creatures\Female\Mage.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Adventures\Entry\Textures\Female\Ninja.png">
+    <Content Include="Content\Adventures\Entry\Textures\Creatures\Female\Ninja.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Adventures\Entry\Textures\Female\Ranger.png">
+    <Content Include="Content\Adventures\Entry\Textures\Creatures\Female\Ranger.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Adventures\Entry\Textures\Female\Townfolk.png">
+    <Content Include="Content\Adventures\Entry\Textures\Creatures\Female\Townfolk.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Adventures\Entry\Textures\Female\Warrior.png">
+    <Content Include="Content\Adventures\Entry\Textures\Creatures\Female\Warrior.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Adventures\Entry\Textures\Creatures\Male\Healer.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Adventures\Entry\Textures\Creatures\Male\Mage.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Adventures\Entry\Textures\Creatures\Male\Ninja.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Adventures\Entry\Textures\Creatures\Male\Ranger.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Adventures\Entry\Textures\Creatures\Male\Townfolk.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Adventures\Entry\Textures\Creatures\Male\Warrior.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Adventures\Entry\Textures\index.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Adventures\Entry\Textures\Male\Healer.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Adventures\Entry\Textures\Male\Mage.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Adventures\Entry\Textures\Male\Ninja.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Adventures\Entry\Textures\Male\Ranger.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Adventures\Entry\Textures\Male\Townfolk.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Adventures\Entry\Textures\Male\Warrior.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Icon.ico" />
