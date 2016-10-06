@@ -4,7 +4,24 @@ GameObject.Components.Add(healer);
 healer.Animations.StartAnimation("Move-Right");
 healer.Velocity = Vector2.UnitX;
 healer.ModifierMovementSpeed = 3;
+healer.Heartbeat.connect((sender, args) => {
+  let width = GameObject.GraphicsDevice.Viewport.Width;
 
+  let flipA = sender.Position.X > width && sender.Velocity.X > 0;
+  let flipB = sender.Position.X < 0 && sender.Velocity.X < 0;
+
+  if (flipA) {
+    sender.Velocity = Vector2.Multiply(sender.Velocity, -1);
+    sender.Animations.StartAnimation("Move-Left");
+  }
+  else if (flipB) {
+    sender.Velocity = Vector2.Multiply(sender.Velocity, -1);
+    sender.Animations.StartAnimation("Move-Right");
+  }
+
+  Log.WriteLine("Velocity: {0}", sender.Velocity);
+  Log.WriteLine("Position: {0}", sender.Position);
+});
 var mage = require("./Creatures/Female/Mage.js").creature;
 mage.Position = new Vector2(0, 90);
 GameObject.Components.Add(mage);
@@ -49,18 +66,3 @@ function checkCreaturePosition(creature, width) {
     }
   }
 }
-
-var x = 3;
-var test = new SimpleGameComponent(GameObject);
-test.UpdateFunction = new SimpleUpdateFunction((time) => {
-  var width = GameObject.GraphicsDevice.Viewport.Width;
-
-  checkCreaturePosition(healer, width);
-  checkCreaturePosition(mage, width);
-  checkCreaturePosition(ninja, width);
-  checkCreaturePosition(ranger, width);
-  checkCreaturePosition(townfolk, width);
-  checkCreaturePosition(warrior, width);
-});
-
-GameObject.Components.Add(test);

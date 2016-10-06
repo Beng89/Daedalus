@@ -1,14 +1,27 @@
 ﻿using Daedalus.Core.Animations;
+using Daedalus.Core.Creatures.CreatureEventArgs;
 using Daedalus.Core.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace Daedalus.Core.Creatures {
   public delegate void CreatureAttributeChangedHandler(Creature sender, CreatureAttributeType attibute, int value);
 
   public class Creature : Sprite {
-    public event CreatureAttributeChangedHandler BaseAttributeChanged;
-    public event CreatureAttributeChangedHandler ModifierAttributeChanged;
+    public event EventHandler<CreatureAttributeChangedEventArgs> BaseAttributeChanged;
+    public event EventHandler<CreatureAttributeChangedEventArgs> ModifierAttributeChanged;
+
+    public event EventHandler<MovementObstructedEventArgs> MovementObstructed;
+    public event EventHandler<DamagedEventArgs> Damaged;
+    public event EventHandler<HealedEventArgs> Healed;
+    public event EventHandler<DeathEventArgs> Death;
+    public event EventHandler<InterruptedEventArgs> Interrupted;
+    public event EventHandler<CreaturePerceivedEventArgs> CreaturePerceived;
+    public event EventHandler<AttackedEventArgs> Attacked;
+    public event EventHandler<SpellCastAtEventArgs> SpellCastAt;
+    public event EventHandler<ItemAcquisitionEventArgs> ItemAcquired;
+    public event EventHandler<ItemAcquisitionEventArgs> ItemUnAcquired;
 
     public override Rectangle Frame {
       get {
@@ -45,7 +58,7 @@ namespace Daedalus.Core.Creatures {
       set {
         if (BaseAttributes.AttackSpeed != value) {
           BaseAttributes.AttackSpeed = value;
-          BaseAttributeChanged?.Invoke(this, CreatureAttributeType.AttackSpeed, value);
+          BaseAttributeChanged?.Invoke(this, new CreatureAttributeChangedEventArgs(CreatureAttributeType.AttackSpeed, value));
         }
       }
     }
@@ -54,7 +67,7 @@ namespace Daedalus.Core.Creatures {
       set {
         if (BaseAttributes.Charisma != value) {
           BaseAttributes.Charisma = value;
-          BaseAttributeChanged?.Invoke(this, CreatureAttributeType.Charisma, value);
+          BaseAttributeChanged?.Invoke(this, new CreatureAttributeChangedEventArgs(CreatureAttributeType.Charisma, value));
         }
       }
     }
@@ -63,7 +76,7 @@ namespace Daedalus.Core.Creatures {
       set {
         if (BaseAttributes.Constitution != value) {
           BaseAttributes.Constitution = value;
-          BaseAttributeChanged?.Invoke(this, CreatureAttributeType.Constitution, value);
+          BaseAttributeChanged?.Invoke(this, new CreatureAttributeChangedEventArgs(CreatureAttributeType.Constitution, value));
         }
       }
     }
@@ -72,7 +85,7 @@ namespace Daedalus.Core.Creatures {
       set {
         if (BaseAttributes.Dexterity != value) {
           BaseAttributes.Dexterity = value;
-          BaseAttributeChanged?.Invoke(this, CreatureAttributeType.Dexterity, value);
+          BaseAttributeChanged?.Invoke(this, new CreatureAttributeChangedEventArgs(CreatureAttributeType.Dexterity, value));
         }
       }
     }
@@ -81,7 +94,7 @@ namespace Daedalus.Core.Creatures {
       set {
         if (BaseAttributes.Intelligence != value) {
           BaseAttributes.Intelligence = value;
-          BaseAttributeChanged?.Invoke(this, CreatureAttributeType.Intelligence, value);
+          BaseAttributeChanged?.Invoke(this, new CreatureAttributeChangedEventArgs(CreatureAttributeType.Intelligence, value));
         }
       }
     }
@@ -90,7 +103,7 @@ namespace Daedalus.Core.Creatures {
       set {
         if (BaseAttributes.MovementSpeed != value) {
           BaseAttributes.MovementSpeed = value;
-          BaseAttributeChanged?.Invoke(this, CreatureAttributeType.MovementSpeed, value);
+          BaseAttributeChanged?.Invoke(this, new CreatureAttributeChangedEventArgs(CreatureAttributeType.MovementSpeed, value));
         }
       }
     }
@@ -99,7 +112,7 @@ namespace Daedalus.Core.Creatures {
       set {
         if (BaseAttributes.Strength != value) {
           BaseAttributes.Strength = value;
-          BaseAttributeChanged?.Invoke(this, CreatureAttributeType.Strength, value);
+          BaseAttributeChanged?.Invoke(this, new CreatureAttributeChangedEventArgs(CreatureAttributeType.Strength, value));
         }
       }
     }
@@ -108,7 +121,7 @@ namespace Daedalus.Core.Creatures {
       set {
         if (BaseAttributes.Wisdom != value) {
           BaseAttributes.Wisdom = value;
-          BaseAttributeChanged?.Invoke(this, CreatureAttributeType.Wisdom, value);
+          BaseAttributeChanged?.Invoke(this, new CreatureAttributeChangedEventArgs(CreatureAttributeType.Wisdom, value));
         }
       }
     }
@@ -119,7 +132,7 @@ namespace Daedalus.Core.Creatures {
       set {
         if (ModifierAttributes.AttackSpeed != value) {
           ModifierAttributes.AttackSpeed = value;
-          ModifierAttributeChanged?.Invoke(this, CreatureAttributeType.AttackSpeed, value);
+          ModifierAttributeChanged?.Invoke(this, new CreatureAttributeChangedEventArgs(CreatureAttributeType.AttackSpeed, value));
         }
       }
     }
@@ -128,7 +141,7 @@ namespace Daedalus.Core.Creatures {
       set {
         if (ModifierAttributes.Charisma != value) {
           ModifierAttributes.Charisma = value;
-          ModifierAttributeChanged?.Invoke(this, CreatureAttributeType.Charisma, value);
+          ModifierAttributeChanged?.Invoke(this, new CreatureAttributeChangedEventArgs(CreatureAttributeType.Charisma, value));
         }
       }
     }
@@ -137,7 +150,7 @@ namespace Daedalus.Core.Creatures {
       set {
         if (ModifierAttributes.Constitution != value) {
           ModifierAttributes.Constitution = value;
-          ModifierAttributeChanged?.Invoke(this, CreatureAttributeType.Constitution, value);
+          ModifierAttributeChanged?.Invoke(this, new CreatureAttributeChangedEventArgs(CreatureAttributeType.Constitution, value));
         }
       }
     }
@@ -146,7 +159,7 @@ namespace Daedalus.Core.Creatures {
       set {
         if (ModifierAttributes.Dexterity != value) {
           ModifierAttributes.Dexterity = value;
-          ModifierAttributeChanged?.Invoke(this, CreatureAttributeType.Dexterity, value);
+          ModifierAttributeChanged?.Invoke(this, new CreatureAttributeChangedEventArgs(CreatureAttributeType.Dexterity, value));
         }
       }
     }
@@ -155,7 +168,7 @@ namespace Daedalus.Core.Creatures {
       set {
         if (ModifierAttributes.Intelligence != value) {
           ModifierAttributes.Intelligence = value;
-          ModifierAttributeChanged?.Invoke(this, CreatureAttributeType.Intelligence, value);
+          ModifierAttributeChanged?.Invoke(this, new CreatureAttributeChangedEventArgs(CreatureAttributeType.Intelligence, value));
         }
       }
     }
@@ -164,7 +177,7 @@ namespace Daedalus.Core.Creatures {
       set {
         if (ModifierAttributes.MovementSpeed != value) {
           ModifierAttributes.MovementSpeed = value;
-          ModifierAttributeChanged?.Invoke(this, CreatureAttributeType.MovementSpeed, value);
+          ModifierAttributeChanged?.Invoke(this, new CreatureAttributeChangedEventArgs(CreatureAttributeType.MovementSpeed, value));
         }
       }
     }
@@ -173,7 +186,7 @@ namespace Daedalus.Core.Creatures {
       set {
         if (ModifierAttributes.Strength != value) {
           ModifierAttributes.Strength = value;
-          ModifierAttributeChanged?.Invoke(this, CreatureAttributeType.Strength, value);
+          ModifierAttributeChanged?.Invoke(this, new CreatureAttributeChangedEventArgs(CreatureAttributeType.Strength, value));
         }
       }
     }
@@ -182,7 +195,7 @@ namespace Daedalus.Core.Creatures {
       set {
         if (ModifierAttributes.Wisdom != value) {
           ModifierAttributes.Wisdom = value;
-          ModifierAttributeChanged?.Invoke(this, CreatureAttributeType.Wisdom, value);
+          ModifierAttributeChanged?.Invoke(this, new CreatureAttributeChangedEventArgs(CreatureAttributeType.Wisdom, value));
         }
       }
     }
@@ -228,14 +241,15 @@ namespace Daedalus.Core.Creatures {
       }
     }
 
+    public const float AnimationTimeMultipler = 0.375f;
+    public const float VelocityTimeMultiplier = 0.02f;
     public override void Update(GameTime gameTime) {
       base.Update(gameTime);
 
-      float elapsed = gameTime.ElapsedGameTime.Milliseconds;
-      float adjustedTime = elapsed * MovementSpeed;
+      float adjustedTime = 1.0f * gameTime.ElapsedGameTime.Milliseconds * MovementSpeed;
 
-      float animationTime = adjustedTime * .375f;
-      float velocityModifier = adjustedTime * .02f;
+      float animationTime = adjustedTime * AnimationTimeMultipler;
+      float velocityModifier = adjustedTime * VelocityTimeMultiplier;
 
       Position += Velocity * velocityModifier;
       Animations.Update(animationTime);

@@ -20,11 +20,13 @@ namespace Daedalus {
 
     public RootModule RootModule;
     public readonly SpriteRenderer SpriteRenderer;
+    public readonly SpriteCollisionDetector SpriteCollisionDetector;
     public readonly ObservableCollection<NativeModule> NativeModules;
 
     public Game1() {
       _graphics = new GraphicsDeviceManager(this);
 
+      SpriteCollisionDetector = new SpriteCollisionDetector(this);
       SpriteRenderer = new SpriteRenderer(this);
       NativeModules = new ObservableCollection<NativeModule>();
       RootModule = new RootModule("Content/Adventures/Entry", NativeModules);
@@ -41,6 +43,7 @@ namespace Daedalus {
     protected override void Initialize() {
       // Add SpriteRenderer
       Components.Add(SpriteRenderer);
+      Components.Add(SpriteCollisionDetector);
 
       // Create modules
       NativeModules.Add(new DaedalusRandomModule());

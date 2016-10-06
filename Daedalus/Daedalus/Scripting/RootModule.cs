@@ -81,6 +81,7 @@ namespace Daedalus.Scripting {
         throw new NullReferenceException("Failed to load the main entry script.");
       }
 
+
       // execute the module
       var __fileName = Path.GetFileName(fullPath);
       var __dirName = Path.GetDirectoryName(fullPath);

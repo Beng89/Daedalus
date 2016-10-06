@@ -1,0 +1,163 @@
+﻿{
+  "$type": "ZombieLand.Models.Animations.AnimationController, ZombieLandModels",
+  "Animations": {
+    "Stand-Up": {
+      "name": "Stand-Up",
+      "textureName": "Creatures/Male/Mage/Sprite",
+      "frames": [
+        {
+          "duration": 33.0,
+          "box": {
+            "x": 34,
+            "y": 0,
+            "width": 28,
+            "height": 34
+          }
+        }
+      ]
+    },
+    "Stand-Right": {
+      "name": "Stand-Right",
+      "textureName": "Creatures/Male/Mage/Sprite",
+      "frames": [
+        {
+          "duration": 33.0,
+          "box": {
+            "x": 32,
+            "y": 36,
+            "width": 28,
+            "height": 34
+          }
+        }
+      ]
+    },
+    "Stand-Down": {
+      "name": "Stand-Down",
+      "textureName": "Creatures/Male/Mage/Sprite",
+      "frames": [
+        {
+          "duration": 33.0,
+          "box": {
+            "x": 34,
+            "y": 72,
+            "width": 28,
+            "height": 34
+          }
+        }
+      ]
+    },
+    "Stand-Left": {
+      "name": "Stand-Left",
+      "textureName": "Creatures/Male/Mage/Sprite",
+      "frames": [
+        {
+          "duration": 33.0,
+          "box": {
+            "x": 36,
+            "y": 108,
+            "width": 28,
+            "height": 34
+          }
+        }
+      ]
+    },
+    "Move-Up": {
+      "name": "Move-Up",
+      "textureName": "Creatures/Male/Mage/Sprite",
+      "frames": [
+        {
+          "duration": 200.0,
+          "box": {
+            "x": 2,
+            "y": 2,
+            "width": 28,
+            "height": 34
+          }
+        },
+        {
+          "duration": 200.0,
+          "box": {
+            "x": 66,
+            "y": 2,
+            "width": 28,
+            "height": 34
+          }
+        }
+      ]
+    },
+    "Move-Right": {
+      "name": "Move-Right",
+      "textureName": "Creatures/Male/Mage/Sprite",
+      "frames": [
+        {
+          "duration": 200.0,
+          "box": {
+            "x": 0,
+            "y": 38,
+            "width": 28,
+            "height": 34
+          }
+        },
+        {
+          "duration": 200.0,
+          "box": {
+            "x": 64,
+            "y": 38,
+            "width": 28,
+            "height": 34
+          }
+        }
+      ]
+    },
+    "Move-Down": {
+      "name": "Move-Down",
+      "textureName": "Creatures/Male/Mage/Sprite",
+      "frames": [
+        {
+          "duration": 200.0,
+          "box": {
+            "x": 2,
+            "y": 74,
+            "width": 28,
+            "height": 34
+          }
+        },
+        {
+          "duration": 200.0,
+          "box": {
+            "x": 66,
+            "y": 74,
+            "width": 28,
+            "height": 34
+          }
+        }
+      ]
+    },
+    "Move-Left": {
+      "name": "Move-Left",
+      "textureName": "Creatures/Male/Mage/Sprite",
+      "frames": [
+        {
+          "duration": 200.0,
+          "box": {
+            "x": 4,
+            "y": 110,
+            "width": 28,
+            "height": 34
+          }
+        },
+        {
+          "duration": 200.0,
+          "box": {
+            "x": 68,
+            "y": 110,
+            "width": 28,
+            "height": 34
+          }
+        }
+      ]
+    }
+  },
+  "updateOrder": 1000,
+  "name": "AnimationController"
+}
